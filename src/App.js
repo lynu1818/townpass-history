@@ -13,6 +13,8 @@ import "./index.css"; // TailwindCSS 樣式
 import BadgePage from "./badge/BadgePage";
 import MapPage from "./map/MapPage";
 import { Question } from "./battle/question";
+import Congrats from "./congrats/congrats";
+import { Story } from "./battle/story";
 
 // Tabs 組件，設置為頂部固定，置中並填滿
 const TopTabs = () => {
@@ -59,7 +61,15 @@ function App() {
 					<Route
 						path="/question/:libraryId"
 						element={<Question />}
-					/>{" "}
+					/>
+					<Route
+						path="/congrats/:libraryId"
+						element={<Congrats />}
+					/>
+					<Route
+						path="/story/:libraryId"
+						element={<Story />}
+					/>
 					{/* 默認跳轉到 MapPage */}
 				</Routes>
 			</div>
