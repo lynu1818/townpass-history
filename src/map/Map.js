@@ -7,7 +7,7 @@ import { ref, get, getDatabase } from "firebase/database";
 
 const locations = [
 	{
-		id: "0",
+		id: 0,
 		name: "二二八和平公園",
 		address: "台北市中正區凱達格蘭大道3號",
 		city: "中正區",
@@ -23,7 +23,7 @@ const locations = [
 		src: "./img/228.jpg",
 	},
 	{
-		id: "1",
+		id: 1,
 		name: "大稻埕",
 		address: "台北市大同區迪化街一段44號",
 		city: "大同區",
@@ -39,7 +39,7 @@ const locations = [
 		src: "./img/dadaocheng.jpg",
 	},
 	{
-		id: "2",
+		id: 2,
 		name: "故宮博物院",
 		address: "台北市士林區至善路二段221號",
 		city: "士林區",
@@ -54,7 +54,7 @@ const locations = [
 		src: "./img/palace_museum.jpg",
 	},
 	{
-		id: "3",
+		id: 3,
 		name: "北投溫泉博物館",
 		address: "台北市北投區中山路2號",
 		city: "北投區",
@@ -69,7 +69,7 @@ const locations = [
 		src: "../img/beitou.jpg",
 	},
 	{
-		id: "4",
+		id: 4,
 		name: "西門紅樓",
 		address: "台北市萬華區成都路10號",
 		city: "萬華區",
@@ -84,7 +84,7 @@ const locations = [
 		src: "../img/ximen.jpg",
 	},
 	{
-		id: "5",
+		id: 5,
 		name: "中正紀念堂",
 		address: "台北市中正區中山南路21號",
 		city: "中正區",
@@ -99,7 +99,7 @@ const locations = [
 		src: "../img/memorial_hall.jpg",
 	},
 	{
-		id: "6",
+		id: 6,
 		name: "剝皮寮歷史街區",
 		address: "台北市萬華區康定路173巷",
 		city: "萬華區",
@@ -114,7 +114,7 @@ const locations = [
 		src: "../img/old_street.jpg",
 	},
 	{
-		id: "7",
+		id: 7,
 		name: "龍山寺",
 		address: "台北市萬華區廣州街211號",
 		city: "萬華區",
@@ -128,17 +128,17 @@ const locations = [
 		option4: "它不是古蹟",
 		src: "../img/temple.jpg",
 	},
+	// {
+	// 	id: 8,
+	// 	name: "二二八和平公園",
+	// 	address: "台北市中正區凱達格蘭大道3號",
+	// 	city: "中正區",
+	// 	latitude: "25.040502406798485",
+	// 	longitude: "121.51554449614804",
+	// 	joke: "板南線的龍山寺站到江子翠站這一段距離，是台北捷運兩站間最長的站距，總共約3.1公里，行車時間大概要3分鐘。",
+	// },
 	{
-		id: "8",
-		name: "二二八和平公園",
-		address: "台北市中正區凱達格蘭大道3號",
-		city: "中正區",
-		latitude: "25.040502406798485",
-		longitude: "121.51554449614804",
-		joke: "板南線的龍山寺站到江子翠站這一段距離，是台北捷運兩站間最長的站距，總共約3.1公里，行車時間大概要3分鐘。",
-	},
-	{
-		id: "9",
+		id: 9,
 		name: "國立臺灣博物館",
 		address: "台北市中正區襄陽路2號",
 		city: "中正區",
@@ -147,7 +147,7 @@ const locations = [
 		joke: "如果想進入捷運站借廁所，可以跟站務人員要一張臨時車票，這張免費車票限時15分鐘、僅限出入同站，出站再繳回即可。",
 	},
 	{
-		id: "10",
+		id: 10,
 		name: "國史館",
 		address: "臺北市中正區長沙街一段2號",
 		city: "中正區",
@@ -156,7 +156,7 @@ const locations = [
 		joke: "台北101能夠承受每小時60米的強風，相當於17級颱風的風力。",
 	},
 	{
-		id: "11",
+		id: 11,
 		name: "臺北市立天文科學教育館",
 		address: "臺北市士林區基河路363號",
 		city: "士林區",
@@ -165,7 +165,7 @@ const locations = [
 		joke: "台北捷運上禁止飲食，除了保持車廂整潔外，也是為了避免食物殘渣吸引小動物破壞、干擾捷運上的設備。",
 	},
 	{
-		id: "12",
+		id: 12,
 		name: "臺北市立動物園",
 		address: "台北市文山區新光路二段30號",
 		city: "文山區",
