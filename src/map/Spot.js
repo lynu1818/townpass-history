@@ -19,6 +19,7 @@ export const spots = [
         "option3": "吳振武",
         "option4": "林茂生",
         "src": "../img/228.jpg",
+        "badgeSrc": "../img/BearB-removebg-preview.png"
     },
     {
         "name": "大稻埕",
@@ -32,7 +33,8 @@ export const spots = [
         "option2": "煙草",
         "option3": "醬油",
         "option4": "米",
-        "src": "../../img/dadaocheng.jpg",
+        "src": "../img/dadaocheng.jpg",
+        "badgeSrc": "../img/BearC-removebg-preview.png"
     },
     {
         "name": "故宮博物院",
@@ -46,7 +48,8 @@ export const spots = [
         "option2": "翠玉白菜、肉形石、毛公鼎",
         "option3": "肉形石、谿山行旅、早春圖",
         "option4": "早春圖、萬壑松風、毛公鼎",
-        "src": "./img/palace_museum.jpg",
+        "src": "../img/palace_museum.jpg",
+        "badgeSrc": "../img/BearD-removebg-preview.png"
     },
     {
         "name": "北投溫泉博物館",
@@ -61,6 +64,7 @@ export const spots = [
         "option3": "西拉雅族",
         "option4": "道卡斯族",
         "src": "../img/beitou.jpg",
+        "badgeSrc": "../img/BearA_1-removebg-preview.png"
     }
 ]
 
