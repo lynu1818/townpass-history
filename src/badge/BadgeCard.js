@@ -17,7 +17,7 @@ export const BadgeCard = ({ date, name, image, info }) => {
     >
       {!isFlipped ? (
         <>
-          <Card.Img variant="top" src={image} style={{ borderLeft: '25px', height: '175px', objectFit: 'cover' }} />
+          <Card.Img variant="top" src={image} style={{ marginLeft: '50px', height: '175px', width:'175px' }} />
           <Card.Body>
             <Card.Title>{name}</Card.Title>
             <Card.Text>收集: {date}</Card.Text>
