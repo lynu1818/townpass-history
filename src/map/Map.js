@@ -1,38 +1,44 @@
 import React, { useState, useRef, useEffect } from "react";
 // import { MarkerClusterer } from "@googlemaps/markerclusterer";
 import LocationTracker from "./LocationTracker";
+import haversine from "haversine-distance"; // 用來計算經緯度之間的距離
+import { useNavigate } from "react-router-dom"; // 引入 useNavigate
 
 const locations = [
 	{
-		name: "台北市立圖書館總館",
-		address: "台北市大安區建國南路二段125號",
-		latitude: "25.030152570498498",
-		longitude: "121.53845991535547",
-		detail: "閱覽區環境整理、圖書資料加工、圖書資料上架、整架、文宣品整理、活動支援",
+		id: "0",
+		name: "二二八和平公園",
+		address: "台北市中正區凱達格蘭大道3號",
+		city: "中正區",
+		latitude: "25.040502406798485",
+		longitude: "121.51554449614804",
 		category: "library",
 	},
 	{
-		name: "台北市立圖書館松山分館",
-		address: "台北市松山區八德路四段688號5-8樓",
-		latitude: "25.050650871692657",
-		longitude: "121.57684989999998",
-		detail: "閱覽區環境整理、圖書資料加工、圖書資料上架、整架、文宣品整理、活動支援",
+		id: "1",
+		name: "大稻埕",
+		address: "台北市大同區迪化街一段44號",
+		city: "大同區",
+		latitude: "25.055186397987633",
+		longitude: "121.5100021826548",
 		category: "library",
 	},
 	{
-		name: "台北市立圖書館民生分館",
-		address: "台北市松山區敦化北路199巷5號4-5樓",
-		latitude: "25.05737095960457",
-		longitude: "121.55159819877916",
-		detail: "閱覽區環境整理、圖書資料加工、圖書資料上架、整架、文宣品整理、活動支援",
+		id: "2",
+		name: "故宮博物院",
+		address: "台北市士林區至善路二段221號",
+		city: "士林區",
+		latitude: "25.103288085585152",
+		longitude: "121.54855687301571",
 		category: "library",
 	},
 	{
-		name: "台北市立圖書館三民分館",
-		address: "台北市松山區民生東路五段163-1號5樓",
-		latitude: "25.059478017951193",
-		longitude: "121.56284760776978",
-		detail: "閱覽區環境整理、圖書資料加工、圖書資料上架、整架、文宣品整理、活動支援",
+		id: "3",
+		name: "北投溫泉博物館",
+		address: "台北市北投區中山路2號",
+		city: "北投區",
+		latitude: "25.136697544499594",
+		longitude: "121.50712146345845",
 		category: "library",
 	},
 ];
@@ -283,6 +289,10 @@ const Map = () => {
 	const mapRef = useRef(null);
 	const [map, setMap] = useState(null); // 儲存地圖實例
 	const [userMarker, setUserMarker] = useState(null); // 使用者位置標記
+	const [distance, setDistance] = useState(null);
+	const [selectedLibrary, setSelectedLibrary] = useState(null);
+	const [openedInfoWindow, setOpenedInfoWindow] = useState(null);
+	const navigate = useNavigate(); // 初始化導航
 
 	// 根據類別來返回不同的圖標
 	const getMarkerIcon = (category) => {
@@ -296,6 +306,20 @@ const Map = () => {
 			default:
 				return "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png"; // 默認黃色標記
 		}
+	};
+
+	// 計算距離
+	const calculateDistance = (userLocation, libraryLocation) => {
+		if (userLocation && libraryLocation) {
+			const userCoords = { lat: userLocation.lat, lon: userLocation.lng };
+			const libraryCoords = {
+				lat: libraryLocation.lat,
+				lon: libraryLocation.lng,
+			};
+			const distance = haversine(userCoords, libraryCoords);
+			return (distance / 1000).toFixed(2); // 公里單位
+		}
+		return null;
 	};
 
 	useEffect(() => {
@@ -361,10 +385,43 @@ const Map = () => {
 				});
 
 				marker.addListener("click", () => {
+					const calculatedDistance = calculateDistance(userLocation, {
+						lat: parseFloat(library.latitude),
+						lng: parseFloat(library.longitude),
+					});
+					setDistance(calculatedDistance); // 設定距離狀態
+
+					// 先顯示基本信息
+					setSelectedLibrary(library);
 					infoWindow.setContent(
-						`<h3>${library.name}</h3><p>地點：${library.address}</p><p>工作事項：${library.detail}</p>`
+						`<div class="text-sm">
+							<h3>${library.name}</h3>
+							<p>${library.address}</p>
+							<p id="distance-info">距離計算中...</p>
+							<button class="btn btn-primary mt-2" id="applyBtn">Go！</button>
+						</div>`
 					);
+
 					infoWindow.open(map, marker);
+
+					// 計算完成後，動態更新距離信息
+					// if (distance !== null) {
+					// 	document.getElementById(
+					// 		"distance-info"
+					// 	).innerHTML = `${distance} 公里`;
+					// } else {
+					// 	document.getElementById("distance-info").innerHTML =
+					// 		"無法計算距離";
+					// }
+
+					// 當點擊 InfoWindow 中的按鈕
+					setTimeout(() => {
+						document.getElementById("applyBtn").onclick = () => {
+							// alert(`你正在申請 ${library.name}`);
+							console.log(library.id);
+							navigate(`/question/${library.id}`);
+						};
+					}, 100); // 避免 InfoWindow 還未渲染完成
 				});
 
 				return marker;
@@ -403,6 +460,23 @@ const Map = () => {
 			map.setCenter(userLocation);
 		}
 	}, [map, userLocation, userMarker]); // 只在 userLocation 或 map 改變時更新
+
+	// 當 distance 狀態改變時，更新 InfoWindow
+	useEffect(() => {
+		if (selectedLibrary && map && openedInfoWindow && distance !== null) {
+			openedInfoWindow.setContent(
+				`
+					<div class="text-sm">
+						<h3>${selectedLibrary.name}</h3>
+						<p>${selectedLibrary.address}</p>
+						<p>距離：${distance} 公里</p>
+						<button class="btn btn-primary mt-2" id="applyBtn">Go！</button>
+					</div>
+				`
+			);
+		}
+	}, [distance, selectedLibrary, map, openedInfoWindow]);
+
 	return (
 		<div>
 			<LocationTracker onLocationUpdate={setUserLocation} />
