@@ -1,0 +1,227 @@
+body {
+  background: #a9212a;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.notification {
+  color: white; /* Text color */
+   /* Padding around the text */
+  text-align: center; /* Center the text */
+  position: absolute; /* Fixed position at the top */
+  top: 25%;
+  left: 0;
+  width: 100%; /* Full width */
+  z-index: 1000; /* Ensure it is on top of other content */
+  font-size: 70px; /* Adjust text size */
+}
+
+
+.letter-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200px;
+  height: 200px;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  animation:  moveEnvelope 2s forwards; /* Animation to move the envelope */
+}
+
+@keyframes moveEnvelope {
+  0% {
+    transform: translate(-50%, -50%);
+  }
+  100% {
+    transform: translate(-50%, -50%) translateY(50px);
+  }
+}
+
+.animated-mail {
+  position: absolute;
+  height: 150px;
+  width: 200px;
+  transition: 0.4s;
+  animation: everythingExpand 1ms forwards, openEnvelope 2s forwards; /* Animation to open the envelope */
+}
+
+@keyframes openEnvelope {
+  0% {
+    transform: rotateX(0);
+  }
+  100% {
+    transform: rotateX(0);
+    z-index: 0;
+  }
+}
+
+@keyframes disappearEnvelope {
+  0% {
+    opacity: 1; /* Fully visible */
+    visibility: visible; /* Ensures the element is visible */
+  }
+  100% {
+    opacity: 0; /* Fully transparent */
+    visibility: hidden; /* Hides the element */
+  }
+}
+
+.animated-mail .body {
+  position: absolute;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 0 100px 200px;
+  border-color: transparent transparent #e95f55 transparent;
+  z-index: 2;
+  animation: bodyDisappear 10ms forwards 3s; /* Disappear after 3 seconds */
+}
+
+@keyframes bodyDisappear {
+  0% {
+    opacity: 1; /* Fully visible */
+    visibility: visible; /* Ensures the element is visible */
+    
+  }
+  100% {
+    opacity: 0; /* Fully transparent */
+    visibility: hidden; /* Hides the element */
+  }
+}
+
+.animated-mail .top-fold {
+  position: absolute;
+  top: 50px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 50px 100px 0 100px;
+  transform-origin: 50% 0%;
+  transition: transform 0.4s 0.4s, z-index 0.2s 0.4s;
+  border-color: #cf4a43 transparent transparent transparent;
+  z-index: 2;
+  animation: foldOpen 2s forwards ,bodyDisappear 10ms forwards 3s; /* Animation for top fold */
+}
+
+@keyframes foldOpen {
+  0% {
+    transform: rotateX(0);
+  }
+  100% {
+    transform: rotateX(180deg);
+    z-index: 0;
+  }
+}
+
+.animated-mail .back-fold {
+  position: absolute;
+  bottom: 0;
+  width: 200px;
+  height: 100px;
+  background: #cf4a43;
+  z-index: 0;
+  animation: bodyDisappear 10ms forwards 3s;
+}
+.animated-mail .left-fold {
+  position: absolute;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 50px 0 50px 100px;
+  border-color: transparent transparent transparent #e15349;
+  z-index: 2;
+  animation: bodyDisappear 10ms forwards 3s;
+}
+.animated-mail .letter {
+  left: 20px;
+  bottom: 0px;
+  position: absolute;
+  width: 160px;
+  height: 60px;
+  background: white;
+  z-index: 1;
+  overflow: hidden;
+  transition: 0.4s 0.2s;
+  animation: letterSlide 2s forwards 1s , letterExpand 2s forwards 3s; /* Animation for letter sliding out */
+}
+
+@keyframes letterSlide {
+  0% {
+    height: 60px;
+  }
+  100% {
+    height: 180px;
+  }
+}
+
+@keyframes letterExpand {
+  0% {
+    transform: scale(1); /* Initial scale */
+  }
+  100% {
+    transform: scale(4); /* Final scale */
+  }
+}
+
+@keyframes everythingExpand {
+  0% {
+    transform: scale(1); /* Initial scale */
+  }
+  100% {
+    transform: scale(3); /* Final scale */
+  }
+}
+
+.animated-mail .letter .letter-border {
+  height: 10px;
+  width: 100%;
+  background: repeating-linear-gradient(-45deg, #cb5a5e, #cb5a5e 8px, transparent 8px, transparent 18px);
+  
+}
+.animated-mail .letter .letter-title {
+  margin-top: 10px;
+  margin-left: 5px;
+  height: 10px;
+  width: 40%;
+  background: #cb5a5e;
+}
+.animated-mail .letter .letter-context {
+  margin-top: 10px;
+  margin-left: 5px;
+  height: 10px;
+  width: 20%;
+  background: #cb5a5e;
+}
+.animated-mail .letter .letter-stamp {
+  margin-top: 30px;
+  margin-left: 120px;
+  border-radius: 100%;
+  height: 30px;
+  width: 30px;
+  background: #cb5a5e;
+  opacity: 0.3;
+}
+
+.shadow {
+  position: absolute;
+  top: 200px;
+  left: 50%;
+  width: 400px;
+  height: 30px;
+  transition: 0.4s;
+  transform: translateX(-50%);
+  border-radius: 100%;
+  background: radial-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0));
+  animation: shadowResize 2s forwards 1s, bodyDisappear 10ms forwards 3s; /* Animation for shadow resize */
+}
+
+@keyframes shadowResize {
+  0% {
+    width: 400px;
+  }
+  100% {
+    width: 250px;
+  }
+}
