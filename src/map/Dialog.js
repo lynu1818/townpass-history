@@ -20,8 +20,8 @@ const DialogComponent = () => {
 				</Col>
 				<Col xs={10}>
 					{/* 右側的對話框內容 */}
-					<div className="bg-light p-3 rounded-lg">
-						<p className="text-dark">
+					<div className="rounded-lg">
+						<p className="text-dark bg-light p-3 rounded">
 							This is a sample dialog message! You can add any
 							content here.
 						</p>

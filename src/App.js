@@ -45,7 +45,10 @@ const TopTabs = () => {
 
 function App() {
 	const location = useLocation();
-	const showTabs = location.pathname === "/map" || location.pathname === "/badge";
+	const showTabs =
+		location.pathname === "/map" ||
+		location.pathname === "/badge" ||
+		location.pathname === "/";
 	return (
 		<div className="App">
 			{/* 固定的 Tabs */}
@@ -58,18 +61,9 @@ function App() {
 					<Route path="/map" element={<MapPage />} />
 					<Route path="/badge" element={<BadgePage />} />
 					<Route path="/" element={<MapPage />} />{" "}
-					<Route
-						path="/question/:libraryId"
-						element={<Question />}
-					/>
-					<Route
-						path="/congrats/:libraryId"
-						element={<Congrats />}
-					/>
-					<Route
-						path="/story/:libraryId"
-						element={<Story />}
-					/>
+					<Route path="/question/:libraryId" element={<Question />} />
+					<Route path="/congrats/:libraryId" element={<Congrats />} />
+					<Route path="/story/:libraryId" element={<Story />} />
 					{/* 默認跳轉到 MapPage */}
 				</Routes>
 			</div>

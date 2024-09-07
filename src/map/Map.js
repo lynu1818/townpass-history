@@ -480,7 +480,7 @@ const Map = () => {
 	return (
 		<div>
 			<LocationTracker onLocationUpdate={setUserLocation} />
-			<div ref={mapRef} style={{ width: "100%", height: "500px" }}></div>
+			<div ref={mapRef} style={{ width: "100%", height: "700px" }}></div>
 		</div>
 	);
 };
