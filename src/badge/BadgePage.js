@@ -1,9 +1,12 @@
-// Badge 頁面組件
+import React from 'react';
+import BadgeCardList from './BadgeCardList';
+
 const BadgePage = () => (
-	<div className="p-5">
-		<h1 className="text-2xl font-bold">Badge Page</h1>
-		<p>This is the Badge page content.</p>
-	</div>
+  <div className="p-5">
+    <h1 className="text-2xl font-bold">你的徽章</h1>
+    <p>快來收集到台北的程式徽章吧～</p>
+    <BadgeCardList />
+  </div>
 );
 
 export default BadgePage;
