@@ -42,29 +42,37 @@ const TopTabs = () => {
 };
 
 function App() {
+	const location = useLocation();
+	const showTabs = location.pathname === "/map" || location.pathname === "/badge";
+	return (
+		<div className="App">
+			{/* 固定的 Tabs */}
+			{showTabs && <TopTabs />}
+
+			{/* 頁面內容 */}
+			<div style={{ paddingTop: "80px" }}>
+				{/* 給內容添加上邊距，防止被 Tabs 遮擋 */}
+				<Routes>
+					<Route path="/map" element={<MapPage />} />
+					<Route path="/badge" element={<BadgePage />} />
+					<Route path="/" element={<MapPage />} />{" "}
+					<Route
+						path="/question/:libraryId"
+						element={<Question />}
+					/>{" "}
+					{/* 默認跳轉到 MapPage */}
+				</Routes>
+			</div>
+		</div>
+	);
+}
+
+function MainApp() {
 	return (
 		<Router>
-			<div className="App">
-				{/* 固定的 Tabs */}
-				<TopTabs />
-
-				{/* 頁面內容 */}
-				<div style={{ paddingTop: "80px" }}>
-					{/* 給內容添加上邊距，防止被 Tabs 遮擋 */}
-					<Routes>
-						<Route path="/map" element={<MapPage />} />
-						<Route path="/badge" element={<BadgePage />} />
-						<Route path="/" element={<MapPage />} />{" "}
-						<Route
-							path="/question/:libraryId"
-							element={<Question />}
-						/>{" "}
-						{/* 默認跳轉到 MapPage */}
-					</Routes>
-				</div>
-			</div>
+			<App />
 		</Router>
 	);
 }
 
-export default App;
+export default MainApp;
