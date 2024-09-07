@@ -3,6 +3,7 @@ import React, { useState, useRef, useEffect } from "react";
 import LocationTracker from "./LocationTracker";
 import haversine from "haversine-distance"; // 用來計算經緯度之間的距離
 import { useNavigate } from "react-router-dom"; // 引入 useNavigate
+import { ref, get, getDatabase } from "firebase/database";
 
 const locations = [
 	{
@@ -292,21 +293,66 @@ const Map = () => {
 	const [distance, setDistance] = useState(null);
 	const [selectedLibrary, setSelectedLibrary] = useState(null);
 	const [openedInfoWindow, setOpenedInfoWindow] = useState(null);
+	const [locationsVisited, setLocationsVisited] = useState([]);
 	const navigate = useNavigate(); // 初始化導航
 
-	// 根據類別來返回不同的圖標
-	const getMarkerIcon = (category) => {
-		switch (category) {
-			case "library":
-				return "https://firebasestorage.googleapis.com/v0/b/townpassstudent.appspot.com/o/library.png?alt=media&token=528e7a9f-67f7-45ce-821c-1fa382962494"; // 主要分館紅色標記
-			case "museum":
-				return "https://firebasestorage.googleapis.com/v0/b/townpassstudent.appspot.com/o/museum.png?alt=media&token=00ea9573-771b-40ae-bb17-4dabe05d6eb1"; // 分館綠色標記
-			case "zoo":
-				return "https://firebasestorage.googleapis.com/v0/b/townpassstudent.appspot.com/o/zoo.png?alt=media&token=33662ee7-a3fd-4f06-89f5-85086bef84bd";
-			default:
-				return "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png"; // 默認黃色標記
+	// 根據類別和是否已經去過來返回不同的圖標
+	const getMarkerIcon = (category, visited) => {
+		let iconUrl;
+		if (visited) {
+			switch (category) {
+				case "library":
+					iconUrl =
+						"https://firebasestorage.googleapis.com/v0/b/townpass-history.appspot.com/o/visited.png?alt=media&token=449b6b78-da57-4d3e-80e9-9cd418fb5363";
+					break;
+				default:
+					iconUrl =
+						"http://maps.google.com/mapfiles/ms/icons/grey-dot.png";
+			}
+		} else {
+			switch (category) {
+				case "library":
+					iconUrl =
+						"https://firebasestorage.googleapis.com/v0/b/townpass-history.appspot.com/o/library.png?alt=media&token=fb868272-411d-4dbe-a964-ba40e279e5c2";
+					break;
+				default:
+					iconUrl =
+						"http://maps.google.com/mapfiles/ms/icons/yellow-dot.png";
+			}
+		}
+		return iconUrl;
+	};
+
+	// 從資料庫中獲取地點數據
+	const fetchLocations = async () => {
+		const db = getDatabase();
+		const locRef = ref(db, "location"); // 假設位置資料儲存在 'location'
+		const snapshot = await get(locRef);
+		if (snapshot.exists()) {
+			console.log("Fetched locations: ", snapshot.val());
+			const data = snapshot.val();
+			return data;
+		} else {
+			console.log("No data available");
+			return [];
 		}
 	};
+
+	useEffect(() => {
+		// 使用異步函數來獲取數據
+		const loadLocations = async () => {
+			try {
+				const locationVisitedData = await fetchLocations(); // 從資料庫中獲取數據
+				setLocationsVisited(locationVisitedData); // 儲存數據到狀態
+			} catch (error) {
+				console.error("Error fetching location data:", error);
+			}
+		};
+
+		loadLocations(); // 調用加載地點的函數
+
+		console.log("Current locations visited: ", locationsVisited);
+	}, []); // [] 確保只在組件掛載時執行一次
 
 	// 計算距離
 	const calculateDistance = (userLocation, libraryLocation) => {
@@ -372,56 +418,45 @@ const Map = () => {
 
 			// 創建遮罩多邊形
 
-			// 添加圖書館位置標記
-			const markers = locations.map((library) => {
+			// 添加地點標記
+			const markers = locations.map((location) => {
+				console.log(location);
 				const marker = new window.google.maps.Marker({
 					position: {
-						lat: parseFloat(library.latitude),
-						lng: parseFloat(library.longitude),
+						lat: parseFloat(location.latitude),
+						lng: parseFloat(location.longitude),
 					},
 					map: map,
-					title: library.name,
-					icon: getMarkerIcon(library.category),
+					title: location.name,
+					icon: getMarkerIcon(
+						location.category,
+						locationsVisited[location.id]
+					), // 根據 visited 狀態顯示不同圖標
 				});
 
 				marker.addListener("click", () => {
-					const calculatedDistance = calculateDistance(userLocation, {
-						lat: parseFloat(library.latitude),
-						lng: parseFloat(library.longitude),
-					});
-					setDistance(calculatedDistance); // 設定距離狀態
-
-					// 先顯示基本信息
-					setSelectedLibrary(library);
 					infoWindow.setContent(
 						`<div class="text-sm">
-							<h3>${library.name}</h3>
-							<p>${library.address}</p>
-							<p id="distance-info">距離計算中...</p>
-							<button class="btn btn-primary mt-2" id="applyBtn">Go！</button>
+							<h3>${location.name}</h3>
+							<p>${location.address}</p>
+                            ${
+								!locationsVisited[location.id]
+									? `<button class="btn btn-primary mt-2" id="applyBtn">Go！</button>`
+									: ""
+							}
 						</div>`
 					);
-
 					infoWindow.open(map, marker);
 
-					// 計算完成後，動態更新距離信息
-					// if (distance !== null) {
-					// 	document.getElementById(
-					// 		"distance-info"
-					// 	).innerHTML = `${distance} 公里`;
-					// } else {
-					// 	document.getElementById("distance-info").innerHTML =
-					// 		"無法計算距離";
-					// }
-
-					// 當點擊 InfoWindow 中的按鈕
-					setTimeout(() => {
-						document.getElementById("applyBtn").onclick = () => {
-							// alert(`你正在申請 ${library.name}`);
-							console.log(library.id);
-							navigate(`/question/${library.id}`);
-						};
-					}, 100); // 避免 InfoWindow 還未渲染完成
+					if (!locationsVisited[location.id]) {
+						// 設置按鈕的行為
+						setTimeout(() => {
+							document.getElementById("applyBtn").onclick =
+								() => {
+									navigate(`/question/${location.id}`);
+								};
+						}, 100); // 避免 InfoWindow 還未渲染完成
+					}
 				});
 
 				return marker;
@@ -436,7 +471,7 @@ const Map = () => {
 		};
 
 		loadGoogleMapsScript();
-	}, []);
+	}, [locationsVisited]);
 
 	useEffect(() => {
 		if (map && userLocation) {
@@ -470,12 +505,16 @@ const Map = () => {
 						<h3>${selectedLibrary.name}</h3>
 						<p>${selectedLibrary.address}</p>
 						<p>距離：${distance} 公里</p>
-						<button class="btn btn-primary mt-2" id="applyBtn">Go！</button>
+                        ${
+							!locationsVisited[selectedLibrary.id]
+								? `<button class="btn btn-primary mt-2" id="applyBtn">Go！</button>`
+								: ""
+						}
 					</div>
 				`
 			);
 		}
-	}, [distance, selectedLibrary, map, openedInfoWindow]);
+	}, [distance, selectedLibrary, map, openedInfoWindow, locationsVisited]);
 
 	return (
 		<div>
