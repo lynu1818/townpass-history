@@ -11,23 +11,23 @@ export const BadgeCard = ({ date, name, image, info }) => {
 
   return (
     <Card 
-      className="mb-4 mx-auto" 
+      className="justify-center items-center mb-4 mx-auto" 
       style={{ width: '18rem', height: '350px', cursor: 'pointer' }} 
       onClick={handleCardClick} 
     >
       {!isFlipped ? (
         <>
-          <Card.Img variant="top" src={image} style={{ height: '225px', objectFit: 'cover' }} />
+          <Card.Img variant="top" src={image} style={{ borderLeft: '25px', height: '175px', objectFit: 'cover' }} />
           <Card.Body>
             <Card.Title>{name}</Card.Title>
-            <Card.Text>Date Collected: {date}</Card.Text>
+            <Card.Text>收集: {date}</Card.Text>
             <Card.Text className="fade-text">點擊查看更多</Card.Text>
           </Card.Body>
         </>
       ) : (
         <Card.Body>
           <Card.Title>{name}</Card.Title>
-          <Card.Text className='mby-5 justify-center items-center w-full max-h-full' style={{height: '300px', overflow: 'auto'} }>{info}</Card.Text>
+          <Card.Text className='by-10' style={{height: '275px', overflow: 'auto'} }>{info}</Card.Text>
         </Card.Body>
       )}
     </Card>

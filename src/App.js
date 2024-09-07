@@ -12,7 +12,7 @@ import "./App.css"; // App 樣式
 import "./index.css"; // TailwindCSS 樣式
 import BadgePage from "./badge/BadgePage";
 import MapPage from "./map/MapPage";
-import Question from "./battle/question";
+import { Question } from "./battle/question";
 import Congrats from "./congrats/congrats";
 import { Story } from "./battle/story";
 import Notification from "./false/false";
@@ -56,7 +56,7 @@ function App() {
 			{showTabs && <TopTabs />}
 
 			{/* 頁面內容 */}
-			<div style={{ paddingTop: showTabs ? "80px" : "0px" }}>
+			<div style={{ paddingTop: "80px" }}>
 				{/* 給內容添加上邊距，防止被 Tabs 遮擋 */}
 				<Routes>
 					<Route path="/map" element={<MapPage />} />

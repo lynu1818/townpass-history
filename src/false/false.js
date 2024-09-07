@@ -29,7 +29,7 @@ const Notification = () => {
 			<div className="my-10">
 				{visible && (
 					<div className="notification" id="notification">
-						<p >答錯了！</p>
+						<p style={{ marginTop: '20px', fontSize: '24px', color: 'red' }}>答錯了！</p>
 						<img
 							src="../img/false.png"
 							alt="Wrong Answer"

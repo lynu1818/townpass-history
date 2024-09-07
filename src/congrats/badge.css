@@ -167,7 +167,8 @@ body {
   height: 60px;
   background: white;
   z-index: 1;
-  overflow: hidden;
+  height: auto;
+  overflow: visible;
   transition: 0.4s 0.2s;
   animation: letterSlide 2s forwards 1s, letterExpand 2s forwards 3s;
   /* Animation for letter sliding out */
