@@ -29,4 +29,4 @@ const spots=[
         "option3": "醬油",
         "option4": "米",
     }
-];
+]
