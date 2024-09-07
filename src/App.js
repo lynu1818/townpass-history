@@ -12,10 +12,9 @@ import "./App.css"; // App 樣式
 import "./index.css"; // TailwindCSS 樣式
 import BadgePage from "./badge/BadgePage";
 import MapPage from "./map/MapPage";
-import { Question } from "./battle/question";
+import  Question  from "./battle/question";
 import Congrats from "./congrats/congrats";
 import { Story } from "./battle/story";
-import Notification from "./false/false";
 
 // Tabs 組件，設置為頂部固定，置中並填滿
 const TopTabs = () => {
@@ -46,10 +45,7 @@ const TopTabs = () => {
 
 function App() {
 	const location = useLocation();
-	const showTabs =
-		location.pathname === "/map" ||
-		location.pathname === "/badge" ||
-		location.pathname === "/";
+	const showTabs = location.pathname === "/map" || location.pathname === "/badge" || location.pathname === '/';
 	return (
 		<div className="App">
 			{/* 固定的 Tabs */}
@@ -64,7 +60,6 @@ function App() {
 					<Route path="/" element={<MapPage />} />{" "}
 					<Route path="/question/:libraryId" element={<Question />} />
 					<Route path="/congrats/:libraryId" element={<Congrats />} />
-					<Route path="/false/:libraryId" element={<Notification />} />
 					<Route path="/story/:libraryId" element={<Story />} />
 					{/* 默認跳轉到 MapPage */}
 				</Routes>
