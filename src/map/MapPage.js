@@ -11,7 +11,6 @@ const MapPage = () => (
 	<>
 		<Dialog />
 		{/* <Example /> */}
-		<div className="mt-8"></div>
 		<Map />
 	</>
 );
