@@ -12,10 +12,10 @@ import "./App.css"; // App 樣式
 import "./index.css"; // TailwindCSS 樣式
 import BadgePage from "./badge/BadgePage";
 import MapPage from "./map/MapPage";
-import  Question  from "./battle/question";
+import Question from "./battle/question";
 import Congrats from "./congrats/congrats";
 import Notification from "./false/false";
-import { Story } from "./battle/story";
+import Story from "./battle/story";
 
 // Tabs 組件，設置為頂部固定，置中並填滿
 const TopTabs = () => {
@@ -53,7 +53,7 @@ function App() {
 			{showTabs && <TopTabs />}
 
 			{/* 頁面內容 */}
-			<div style={{ paddingTop: "80px" }}>
+			<div style={{ paddingTop: showTabs ? "80px" : "0px" }}>
 				{/* 給內容添加上邊距，防止被 Tabs 遮擋 */}
 				<Routes>
 					<Route path="/map" element={<MapPage />} />
