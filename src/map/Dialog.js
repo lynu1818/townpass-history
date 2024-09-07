@@ -13,17 +13,16 @@ const DialogComponent = () => {
 					{/* 左側的圓形頭像 */}
 					<img
 						className="rounded-circle"
-						src="https://via.placeholder.com/100"
+						src="/img/Bearr-removebg-preview.png"
 						alt="avatar"
 						style={{ width: "64px", height: "64px" }} // 控制頭像大小
 					/>
 				</Col>
-				<Col xs={10}>
+				<Col >
 					{/* 右側的對話框內容 */}
 					<div className="rounded-lg">
 						<p className="text-dark bg-light p-3 rounded">
-							This is a sample dialog message! You can add any
-							content here.
+							點擊以下地標，回答問題及冷知識吧！
 						</p>
 					</div>
 				</Col>
