@@ -21,13 +21,13 @@ export const BadgeCard = ({ date, name, image, info }) => {
           <Card.Body>
             <Card.Title>{name}</Card.Title>
             <Card.Text>Date Collected: {date}</Card.Text>
-            <Card.Text className="fade-text">Click to see details</Card.Text>
+            <Card.Text className="fade-text">點擊查看更多</Card.Text>
           </Card.Body>
         </>
       ) : (
         <Card.Body>
           <Card.Title>{name}</Card.Title>
-          <Card.Text style={{ height: '200px', overflow: 'auto' }}>{info}</Card.Text>
+          <Card.Text className='mby-5 justify-center items-center w-full max-h-full' style={{height: '300px', overflow: 'auto'} }>{info}</Card.Text>
         </Card.Body>
       )}
     </Card>

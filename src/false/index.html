@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Notification</title>
+  <link rel="stylesheet" href="false.css">
+  <!-- Include React and Babel -->
+  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    const Notification = () => {
+      const [visible, setVisible] = useState(true);
+      const [animate, setAnimate] = useState(false);
+
+      useEffect(() => {
+        if (visible) {
+          setAnimate(true);
+          const timer = setTimeout(() => {
+            setAnimate(false);
+            setVisible(false);
+          }, 1500);
+          return () => clearTimeout(timer);
+        }
+      }, [visible]);
+
+      return (
+        <div>
+          {visible && (
+            <div className="b-15 notification" id="notification">
+              <p className="text-red bx-15">答錯了！</p>
+              <img
+                src="false.png"
+                alt="Wrong Answer"
+                id="falseImage"
+                className={animate ? 'animate' : ''}
+              />
+            </div>
+          )}
+        </div>
+      );
+    };
+
+    ReactDOM.render(<Notification />, document.getElementById('root'));
+  </script>
+</body>
+</html>
