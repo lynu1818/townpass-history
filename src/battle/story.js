@@ -1,4 +1,4 @@
-import { Grid2, Typography } from "@mui/material";
+import { Grid2, Typography, Box } from "@mui/material";
 import { useEffect, useState } from "react";
 import { spots } from "../map/Spot";
 
@@ -6,18 +6,26 @@ import { spots } from "../map/Spot";
 export function Story(props) {
     const [info, setInfo] = useState({})
     const getInfo = () => {
-        setInfo(spots[props.id]);
+        const spotInfo = spots[props.id];
+        console.log(spotInfo);
+        setInfo(spotInfo);
     }
 
     useEffect(() => {
         if (Object.keys(info).length === 0)
             getInfo();
-    })
+    }, [props.id])
 
     return (
         <>
             <Grid2 minHeight={150}>
-                hi
+                <Box
+                    component="img"
+                    sx={{
+                        height: 150
+                    }}
+                    src={info.src}
+                />
             </Grid2>
             <Typography variant="h4">{info.name}</Typography>
             <Typography variant="h6">{info.address}</Typography>
