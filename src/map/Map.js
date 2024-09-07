@@ -564,7 +564,7 @@ const Map = () => {
                             ${
 								!locationsVisited[location.id] &&
 								location.id < 8
-									? `<button class="btn btn-primary mt-2" id="applyBtn">Go！</button>`
+									? `<button class="mt-2" id="applyBtn" style="background-color: #5AB4C5; border:none; color:white; border-radius: 3px;">Go！</button>`
 									: ""
 							}
                             ${
@@ -605,13 +605,6 @@ const Map = () => {
 				// 更新現有標記的位置
 				userMarker.setPosition(userLocation);
 			}
-
-			// 使用 MarkerClusterer 來管理標記
-			// new MarkerClusterer({
-			// 	markers,
-			// 	map,
-			// 	renderer,
-			// });
 		};
 
 		loadGoogleMapsScript();
@@ -669,7 +662,7 @@ const Map = () => {
                         ${
 							!locationsVisited[selectedLibrary.id] &&
 							selectedLibrary.id < 8
-								? `<button class="btn btn-primary mt-2" id="applyBtn">Go！</button>`
+								? `<button class="mt-2" id="applyBtn" style="background-color: #5AB4C5; border:none; color:white; border-radius: 3px;">Go！</button>`
 								: ""
 						}
                         ${
