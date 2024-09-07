@@ -49,7 +49,7 @@ function App() {
 	return (
 		<div className="App">
 			{/* 固定的 Tabs */}
-			<TopTabs />
+			{showTabs && <TopTabs />}
 
 			{/* 頁面內容 */}
 			<div style={{ paddingTop: "80px" }}>
