@@ -38,7 +38,7 @@ export function Question() {
         if (cho == ans) {
             navigate('/congrats/' + libraryId);
         } else {
-            alert("Oh, no!");
+            navigate('/false/' + libraryId);
         }
     };
 
@@ -67,6 +67,7 @@ export function Question() {
                                     variant="text"
                                     sx={{ width: 100, height: 100 }}
                                     onClick={() => checkAns(ele)}
+                                    className="option"
                                 >
                                     <Typography variant="h6">{ele}</Typography>
                                 </Button>
