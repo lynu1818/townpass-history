@@ -538,6 +538,11 @@ const Map = () => {
 									? `<button class="btn btn-primary mt-2" id="applyBtn">Go！</button>`
 									: ""
 							}
+                            ${
+								location.id > 7
+									? `<p>${locations[location.id].joke}</p>`
+									: ""
+							}
 						</div>`
 					);
 					infoWindow.open(map, marker);
@@ -557,6 +562,20 @@ const Map = () => {
 
 				return marker;
 			});
+			if (!userMarker) {
+				const newMarker = new window.google.maps.Marker({
+					position: userLocation,
+					map: map,
+					title: "Your Location",
+					icon: {
+						url: "https://firebasestorage.googleapis.com/v0/b/townpass-history.appspot.com/o/me.png?alt=media&token=cc20ea2d-5fce-469d-9b54-4f1bd43771e5", // 使用藍色標記
+					},
+				});
+				setUserMarker(newMarker); // 儲存使用者標記
+			} else {
+				// 更新現有標記的位置
+				userMarker.setPosition(userLocation);
+			}
 
 			// 使用 MarkerClusterer 來管理標記
 			// new MarkerClusterer({
@@ -567,7 +586,7 @@ const Map = () => {
 		};
 
 		loadGoogleMapsScript();
-	}, [locationsVisited]);
+	}, [locationsVisited, userLocation, userMarker, navigate]);
 
 	useEffect(() => {
 		if (map && userLocation) {
@@ -594,13 +613,14 @@ const Map = () => {
 				}
 
 				// 更新地圖中心到使用者當前位置
-				map.setCenter(userLocation);
+				// map.setCenter(userLocation);
 
 				// 檢查 selectedLibrary 是否存在經緯度並轉換為數字
 				const libraryLocation = {
 					lat: parseFloat(selectedLibrary.latitude),
 					lng: parseFloat(selectedLibrary.longitude),
 				};
+				map.setCenter(libraryLocation);
 
 				// 計算距離
 				setDistance(calculateDistance(userLocation, libraryLocation));
@@ -618,8 +638,14 @@ const Map = () => {
 						<p>${selectedLibrary.address}</p>
 						<p>距離：${distance} 公里</p>
                         ${
-							!locationsVisited[selectedLibrary.id]
+							!locationsVisited[selectedLibrary.id] &&
+							selectedLibrary.id < 8
 								? `<button class="btn btn-primary mt-2" id="applyBtn">Go！</button>`
+								: ""
+						}
+                        ${
+							selectedLibrary.id > 7
+								? `<p>${locations[selectedLibrary.id].joke}</p>`
 								: ""
 						}
 					</div>
