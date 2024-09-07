@@ -19,6 +19,7 @@ const Notification = () => {
 			const timer = setTimeout(() => {
 				setAnimate(false);
 				setVisible(false);
+				navigate(`/story/${libraryId}`);
 			}, 1500);
 			return () => clearTimeout(timer); // Cleanup timer
 		}
@@ -39,9 +40,6 @@ const Notification = () => {
 					</div>
 				)}
 			</div>
-			<Button onClick={handleClick}>
-				確認
-			</Button>
 		</>
 	);
 };
