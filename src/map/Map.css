@@ -1,0 +1,16 @@
+/* 覆蓋 pin 樣式 */
+circle.pin {
+    fill: #ff0000; /* 更改填充顏色 */
+    stroke: #000000; /* 邊框顏色 */
+    stroke-width: 2px; /* 邊框寬度 */
+    r: 1; /* 圓形的半徑，調整大小 */
+  }
+  
+  /* 針對特定圖層的樣式 */
+  circle.pin.-layer-2 {
+    fill: #00ff00; /* 特定 pin 的填充顏色 */
+    stroke: #ffffff; /* 邊框顏色 */
+    stroke-width: 3px;
+    r: 1; /* 調整特定圖層的大小 */
+  }
+  
