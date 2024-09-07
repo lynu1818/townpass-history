@@ -1,7 +1,14 @@
 import React from 'react';
 import './badge.css';  // Assuming you have the same CSS in badge.css
+import { Link, useParams, useNavigate } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 
 const Congrats = () => {
+    const { libraryId } = useParams();
+    const navigate = useNavigate();
+    const handleClick = () => {
+        navigate(`/story/${libraryId}`);
+    }
     return (
         <div className='congrats_body'>
             <div className="notification">
@@ -24,6 +31,9 @@ const Congrats = () => {
                 </div>
                 <div className="shadow"></div>
             </div>
+            <Button onClick={handleClick}>
+                確認
+            </Button>
         </div>
     );
 };
