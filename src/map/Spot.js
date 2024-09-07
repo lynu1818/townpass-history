@@ -15,7 +15,7 @@ export const spots = [
         "option2": "陳澄波",
         "option3": "吳振武",
         "option4": "林茂生",
-        "src": "./img/228.jpg",
+        "src": "../img/228.jpg",
     },
     {
         "name": "大稻埕",
@@ -29,7 +29,7 @@ export const spots = [
         "option2": "煙草",
         "option3": "醬油",
         "option4": "米",
-        "src": "./img/dadaocheng.jpg",
+        "src": "../../img/dadaocheng.jpg",
     },
     {
         "name": "故宮博物院",
