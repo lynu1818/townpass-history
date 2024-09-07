@@ -45,7 +45,7 @@ const TopTabs = () => {
 
 function App() {
 	const location = useLocation();
-	const showTabs = location.pathname === "/map" || location.pathname === "/badge";
+	const showTabs = location.pathname === "/map" || location.pathname === "/badge" || location.pathname === '/';
 	return (
 		<div className="App">
 			{/* 固定的 Tabs */}

@@ -1,0 +1,48 @@
+body {
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f9f9f9;
+  }
+  
+  .notification {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  p {
+    margin-top: 20px; /* Space from the top of the screen */
+    font-size: 24px;
+    color: red;
+  }
+  
+  img {
+    margin-top: 30px; /* Space between the text and the image */
+    width: 200px;
+    height: 200px;
+    transition: transform 1s ease-in-out;
+  }
+  
+  @keyframes spinScale {
+    0% {
+      transform: scale(1) rotate(0deg);
+    }
+    50% {
+      transform: scale(1.5) rotate(180deg);
+    }
+    100% {
+      transform: scale(1) rotate(360deg);
+    }
+  }
+  
+  .animate {
+    animation: spinScale 1.5s ease-in-out;
+  }
+  
