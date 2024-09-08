@@ -32,12 +32,12 @@ const TopTabs = () => {
 		>
 			<Tab
 				eventKey="map"
-				title="Map"
+				title="地圖"
 				className="flex-grow-1 text-center"
 			/>
 			<Tab
 				eventKey="badge"
-				title="Badge"
+				title="徽章"
 				className="flex-grow-1 text-center"
 			/>
 		</Tabs>
@@ -46,7 +46,10 @@ const TopTabs = () => {
 
 function App() {
 	const location = useLocation();
-	const showTabs = location.pathname === "/map" || location.pathname === "/badge" || location.pathname === '/';
+	const showTabs =
+		location.pathname === "/map" ||
+		location.pathname === "/badge" ||
+		location.pathname === "/";
 	return (
 		<div className="App">
 			{/* 固定的 Tabs */}
