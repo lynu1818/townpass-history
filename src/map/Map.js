@@ -129,6 +129,7 @@ const locations = [
 		src: "../img/temple.jpg",
 	},
 	{
+		id: "8",
 		name: "台北101",
 		address: "台北市信義區信義路五段7號",
 		city: "信義區",
