@@ -18,9 +18,10 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
+// Initialize other Firebase services
 const analytics = getAnalytics(app);
 const auth = getAuth(app);
-const database = getDatabase(app);
+const database = getDatabase(app); // This is what you'll use for the 'get' method
 const storage = getStorage(app);
 const provider = new GoogleAuthProvider();
 
