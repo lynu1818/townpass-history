@@ -34,11 +34,13 @@ const TopTabs = () => {
 				eventKey="map"
 				title="地圖"
 				className="flex-grow-1 text-center"
+				style={{ color: "#5AB4C5 !important" }}
 			/>
 			<Tab
 				eventKey="badge"
 				title="徽章"
 				className="flex-grow-1 text-center"
+				style={{ color: "#5AB4C5 !important" }}
 			/>
 		</Tabs>
 	);
