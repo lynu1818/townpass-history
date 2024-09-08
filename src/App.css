@@ -36,3 +36,14 @@
     transform: rotate(360deg);
   }
 }
+
+
+.custom-tabs .nav-link {
+  color: #000000; 
+}
+
+.custom-tabs .nav-link.active {
+  color: #5ab4c5; 
+  border-bottom-color: #5ab4c5; 
+}
+

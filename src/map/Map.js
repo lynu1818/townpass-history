@@ -128,15 +128,14 @@ const locations = [
 		option4: "它不是古蹟",
 		src: "../img/temple.jpg",
 	},
-	// {
-	// 	id: 8,
-	// 	name: "二二八和平公園",
-	// 	address: "台北市中正區凱達格蘭大道3號",
-	// 	city: "中正區",
-	// 	latitude: "25.040502406798485",
-	// 	longitude: "121.51554449614804",
-	// 	joke: "板南線的龍山寺站到江子翠站這一段距離，是台北捷運兩站間最長的站距，總共約3.1公里，行車時間大概要3分鐘。",
-	// },
+	{
+		name: "台北101",
+		address: "台北市信義區信義路五段7號",
+		city: "信義區",
+		latitude: "25.03417039640273",
+		longitude: "121.56451743808957",
+		joke: "板南線的龍山寺站到江子翠站這一段距離，是台北捷運兩站間最長的站距，總共約3.1公里，行車時間大概要3分鐘。",
+	},
 	{
 		id: 9,
 		name: "國立臺灣博物館",
@@ -564,7 +563,7 @@ const Map = () => {
                             ${
 								!locationsVisited[location.id] &&
 								location.id < 8
-									? `<button class="btn btn-primary mt-2" id="applyBtn">Go！</button>`
+									? `<button class="mt-2" id="applyBtn" style="background-color: #5AB4C5; border:none; color:white; border-radius: 3px;">Go！</button>`
 									: ""
 							}
                             ${
@@ -605,13 +604,6 @@ const Map = () => {
 				// 更新現有標記的位置
 				userMarker.setPosition(userLocation);
 			}
-
-			// 使用 MarkerClusterer 來管理標記
-			// new MarkerClusterer({
-			// 	markers,
-			// 	map,
-			// 	renderer,
-			// });
 		};
 
 		loadGoogleMapsScript();
@@ -669,7 +661,7 @@ const Map = () => {
                         ${
 							!locationsVisited[selectedLibrary.id] &&
 							selectedLibrary.id < 8
-								? `<button class="btn btn-primary mt-2" id="applyBtn">Go！</button>`
+								? `<button class="mt-2" id="applyBtn" style="background-color: #5AB4C5; border:none; color:white; border-radius: 3px;">Go！</button>`
 								: ""
 						}
                         ${
