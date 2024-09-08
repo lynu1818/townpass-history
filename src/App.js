@@ -17,8 +17,7 @@ import Congrats from "./congrats/congrats";
 import Notification from "./false/false";
 import Story from "./battle/story";
 
-// Tabs 組件，設置為頂部固定，置中並填滿
-const TopTabs = () => {
+export const TopTabs = () => {
 	const location = useLocation(); // 用來獲取當前路徑
 	const navigate = useNavigate(); // 用來進行頁面跳轉
 	const activeKey = location.pathname === "/badge" ? "badge" : "map"; // 根據路徑來設置當前激活的 Tab
@@ -26,7 +25,7 @@ const TopTabs = () => {
 	return (
 		<Tabs
 			activeKey={activeKey} // 根據路徑動態設置 activeKey
-			className="mb-3 fixed-top bg-white w-100 d-flex justify-content-center" // 使用 Bootstrap 和 TailwindCSS 設置寬度為 100% 並置中
+			className="mb-3 fixed-top w-100 d-flex justify-content-center custom-tabs" // 使用 Bootstrap 設置寬度為 100% 並置中
 			onSelect={(k) => navigate(`/${k}`)} // 根據選中的 Tab 進行頁面跳轉
 			fill // 讓 Tabs 填滿
 		>
@@ -45,7 +44,6 @@ const TopTabs = () => {
 		</Tabs>
 	);
 };
-
 function App() {
 	const location = useLocation();
 	const showTabs =
@@ -63,7 +61,7 @@ function App() {
 				<Routes>
 					<Route path="/map" element={<MapPage />} />
 					<Route path="/badge" element={<BadgePage />} />
-					<Route path="/" element={<MapPage />} />{" "}
+					<Route path="/" element={<MapPage />} />
 					<Route path="/question/:libraryId" element={<Question />} />
 					<Route path="/congrats/:libraryId" element={<Congrats />} />
 					<Route
@@ -71,7 +69,6 @@ function App() {
 						element={<Notification />}
 					/>
 					<Route path="/story/:libraryId" element={<Story />} />
-					{/* 默認跳轉到 MapPage */}
 				</Routes>
 			</div>
 		</div>
