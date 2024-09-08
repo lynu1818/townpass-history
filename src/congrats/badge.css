@@ -164,23 +164,36 @@ body {
   bottom: 0px;
   position: absolute;
   width: 160px;
-  height: 60px;
-  background: white;
+  height: 1px;
+  /* background: white; */
   z-index: 1;
   height: auto;
+  visibility: hidden;
   overflow: visible;
   transition: 0.4s 0.2s;
   animation: letterSlide 2s forwards 1s, letterExpand 2s forwards 3s;
   /* Animation for letter sliding out */
 }
 
+@keyframes letterAppear {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
 @keyframes letterSlide {
   0% {
-    height: 60px;
+    height: 1px;
+    visibility: hidden;
   }
 
   100% {
     height: 180px;
+    visibility: visible;
   }
 }
 
@@ -191,7 +204,7 @@ body {
   }
 
   100% {
-    transform: scale(4);
+    transform: scale(2);
     /* Final scale */
   }
 }
