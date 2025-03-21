@@ -56,11 +56,3 @@ npm install
 npm start
 ```
 This will launch the app in development mode. Open http://localhost:3000 to view it in your browser.
-
-### 4. Google Maps API Key Required
-
-Create a .env file in the root directory and add your key:
-
-```
-REACT_APP_GOOGLE_MAPS_API_KEY=your_api_key_here
-```
