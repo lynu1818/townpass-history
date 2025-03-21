@@ -538,7 +538,6 @@ const Map = () => {
 				disableAutoPan: true,
 			});
 
-			// 創建遮罩多邊形
 
 			// 添加地點標記
 			const markers = locations.map((location) => {

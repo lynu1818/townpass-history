@@ -1,77 +1,46 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 const LocationTracker = ({ onLocationUpdate }) => {
-	// const [status, setStatus] = useState("Initializing...");
 	const [location, setLocation] = useState({ lat: null, lng: null });
-	let watchId = null;
+	const watchIdRef = useRef(null);
 
 	useEffect(() => {
-		const startTracking = () => {
-			if (navigator.geolocation) {
-				// setStatus("Tracking location...");
-
-				// 使用 watchPosition 監聽位置變化
-				watchId = navigator.geolocation.watchPosition(
-					(position) => {
-						const { latitude, longitude } = position.coords;
-						setLocation({ lat: latitude, lng: longitude });
-						// setStatus("Location is being tracked.");
-
-						// 將位置更新傳遞給父組件
-						onLocationUpdate({ lat: latitude, lng: longitude });
-					},
-					(error) => {
-						switch (error.code) {
-							case error.PERMISSION_DENIED:
-								// setStatus(
-								// 	"User denied the request for Geolocation."
-								// );
-								break;
-							case error.POSITION_UNAVAILABLE:
-								// setStatus(
-								// 	"Location information is unavailable."
-								// );
-								break;
-							case error.TIMEOUT:
-								// setStatus(
-								// 	"The request to get user location timed out."
-								// );
-								break;
-							case error.UNKNOWN_ERROR:
-								// setStatus("An unknown error occurred.");
-								break;
-						}
-					},
-					{
-						enableHighAccuracy: true, // 提高精度
-						maximumAge: 0, // 不使用緩存的位置信息
-						timeout: 5000, // 超時時間
-					}
-				);
-			} else {
-				// setStatus("Geolocation is not supported by this browser.");
-			}
-		};
-
-		startTracking();
+		if (navigator.geolocation) {
+			watchIdRef.current = navigator.geolocation.watchPosition(
+				(position) => {
+					const { latitude, longitude } = position.coords;
+					setLocation({ lat: latitude, lng: longitude });
+					onLocationUpdate({ lat: latitude, lng: longitude });
+				},
+				(error) => {
+					console.error("Geolocation error:", error);
+				},
+				{
+					enableHighAccuracy: true,
+					maximumAge: 0,
+					timeout: 5000,
+				}
+			);
+		}
 
 		return () => {
-			if (watchId) {
-				navigator.geolocation.clearWatch(watchId);
+			if (watchIdRef.current !== null) {
+				navigator.geolocation.clearWatch(watchIdRef.current);
 			}
 		};
 	}, [onLocationUpdate]);
 
-	return (
-		<div>
-			{/* <p id="status">{status}</p> */}
-			{/* <p id="location">
-				{location.lat && location.lng
-					? `Latitude: ${location.lat}, Longitude: ${location.lng}`
-					: "Location not available"}
-			</p> */}
-		</div>
-	);
+  return (
+    <div style={{ padding: "1rem"}}>
+      <h4 style={{ marginBottom: "0.5rem", color: "#333" }}>📍 您目前所在位置：</h4>
+      <p style={{ fontSize: "16px", color: location.lat && location.lng ? "#007bff" : "#999" }}>
+        {location.lat && location.lng
+          ? `緯度：${location.lat.toFixed(6)}，經度：${location.lng.toFixed(6)}`
+          : "尚未取得位置資訊"}
+      </p>
+    </div>
+  );
+  
 };
 
 export default LocationTracker;

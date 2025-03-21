@@ -1,10 +1,3 @@
-// import React, { useState, useRef, useEffect } from "react";
-// import { MarkerClusterer } from "@googlemaps/markerclusterer";
-// import LocationTracker from "../location/location";
-// import React, { useState, useRef, useEffect } from "react";
-// import { MarkerClusterer } from "@googlemaps/markerclusterer";
-// import LocationTracker from "../location/location";
-
 export const spots = [
     {
         "name": "二二八和平公園",

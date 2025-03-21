@@ -1,70 +1,66 @@
-# Getting Started with Create React App
+# 臺北尋奇 (Taipei City Cultural Explorer)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Taipei City Cultural Explorer is a map-based microservice designed to work with the **Taipei City Pass** platform. This project aims to help residents and visitors discover the rich history and culture of Taipei through interactive map experiences and a collectible badge system.
 
-## Available Scripts
+## Demo
 
-In the project directory, you can run:
+![Demo](demo.gif)
+## Motivation
 
-### `npm start`
+We observed that many Taipei residents rarely have the time or motivation to deeply explore the city's cultural and historical landmarks. To address this, we created **臺北尋奇**, a microservice that encourages cultural discovery through **fun quiz interactions** and a **badge-collecting system**, blending education and gamification to promote engagement with the city's heritage.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## System Overview
 
-### `npm test`
+The user interface is divided into two main sections: **Interactive Map** and **Badge Collection**.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Map Features
 
-### `npm run build`
+We integrated the **Google Maps API** to display cultural sites and implemented three types of markers:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- 🟢 **Green Markers**: Interactable when users are within 200 meters. Clicking “Go” opens a fun quiz related to the location. Answering correctly rewards the user with a collectible Formosan Black Bear badge, and a short story about the site curated from the Taipei Travel website.
+- ⚪ **Gray Markers**: Indicate locations where badges have already been collected.
+- 🟡 **Yellow Markers**: Share fun facts or practical information related to the Taipei City Pass.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Badge System
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Collected badges are displayed on the **Badge Collection** page. Each badge features not only a cute visual but also a story related to the visited location, acting like a digital travel journal that helps users revisit memories of their Taipei adventures.
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Future Development
+Potential enhancements include:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Time-based missions or seasonal events
+- Expanding the map across the dimension of time
+- Adding more gamified elements to deepen cultural learning
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Getting Started
 
-## Learn More
+To run the project locally:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 1. Clone the repository
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+git clone https://github.com/lynu1818/townpass-history.git
+cd townpass-history
+```
+### 2. Install dependencies
+```
+npm install
+```
+### 3. Start the development server
+```
+npm start
+```
+This will launch the app in development mode. Open http://localhost:3000 to view it in your browser.
 
-### Code Splitting
+### 4. Google Maps API Key Required
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Create a .env file in the root directory and add your key:
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
+REACT_APP_GOOGLE_MAPS_API_KEY=your_api_key_here
+```
